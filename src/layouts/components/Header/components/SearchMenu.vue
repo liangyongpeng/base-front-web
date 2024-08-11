@@ -20,9 +20,9 @@
         >
           <div class="menu-lf">
             <el-icon class="menu-icon">
-              <component :is="item.meta.icon"></component>
+              <component :is="item.icon"></component>
             </el-icon>
-            <span class="menu-title">{{ item.meta.title }}</span>
+            <span class="menu-title">{{ item.name }}</span>
           </div>
           <i :class="'iconfont icon-huiche'" class="menu-enter" @click="handleOpen"></i>
         </div>
@@ -42,7 +42,7 @@ import { useDebounceFn } from "@vueuse/core";
 
 const router = useRouter();
 const authStore = useAuthStore();
-const menuList = computed(() => authStore.flatMenuListGet.filter(item => !item.meta.isHide));
+const menuList = computed(() => authStore.flatMenuListGet.filter(item => !item.isHide));
 
 onMounted(() => {
   document.addEventListener("keydown", keyboardOperation);
@@ -75,8 +75,8 @@ const updateSearchList = () => {
     ? menuList.value.filter(
         item =>
           (item.path.toLowerCase().includes(searchMenu.value.toLowerCase()) ||
-            item.meta.title.toLowerCase().includes(searchMenu.value.toLowerCase())) &&
-          !item.meta?.isHide
+            item.name.toLowerCase().includes(searchMenu.value.toLowerCase())) &&
+          !item?.isHide
       )
     : [];
   activePath.value = searchList.value.length ? searchList.value[0].path : "";
@@ -116,7 +116,7 @@ const keyboardOperation = (event: KeyboardEvent) => {
 const handleClickMenu = () => {
   const menu = searchList.value.find(item => item.path === activePath.value);
   if (!menu) return;
-  if (menu.meta?.isLink) window.open(menu.meta.isLink, "_blank");
+  if (menu?.isLink) window.open(menu.isLink, "_blank");
   else router.push(menu.path);
   searchMenu.value = "";
   isShowSearch.value = false;

@@ -3,9 +3,14 @@ declare namespace Menu {
   interface MenuOptions {
     path: string;
     name: string;
+    componentName: string;
     component?: string | (() => Promise<unknown>);
-    redirect?: string;
-    meta: MetaProps;
+    icon: string;
+    isLink?: string;
+    isHide: boolean;
+    // isFull: boolean;
+    isAffix: boolean;
+    keepAlive: boolean;
     children?: MenuOptions[];
   }
   interface MetaProps {

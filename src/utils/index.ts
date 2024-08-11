@@ -165,7 +165,7 @@ export function getShowMenuList(menuList: Menu.MenuOptions[]) {
   let newMenuList: Menu.MenuOptions[] = JSON.parse(JSON.stringify(menuList));
   return newMenuList.filter(item => {
     item.children?.length && (item.children = getShowMenuList(item.children));
-    return !item.meta?.isHide;
+    return !item?.isHide;
   });
 }
 
@@ -223,7 +223,7 @@ export function findMenuByPath(menuList: Menu.MenuOptions[], path: string): Menu
  * */
 export function getKeepAliveRouterName(menuList: Menu.MenuOptions[], keepAliveNameArr: string[] = []) {
   menuList.forEach(item => {
-    item.meta.isKeepAlive && item.name && keepAliveNameArr.push(item.name);
+    item.keepAlive && item.componentName && keepAliveNameArr.push(item.componentName);
     item.children?.length && getKeepAliveRouterName(item.children, keepAliveNameArr);
   });
   return keepAliveNameArr;

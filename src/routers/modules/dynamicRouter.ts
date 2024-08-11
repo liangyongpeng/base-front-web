@@ -39,11 +39,12 @@ export const initDynamicRouter = async () => {
       if (item.component && typeof item.component == "string") {
         item.component = modules["/src/views" + item.component + ".vue"];
       }
-      if (item.meta.isFull) {
-        router.addRoute(item as unknown as RouteRecordRaw);
-      } else {
-        router.addRoute("layout", item as unknown as RouteRecordRaw);
-      }
+      router.addRoute("layout", item as unknown as RouteRecordRaw);
+      // if (item.meta.isFull) {
+      //   router.addRoute(item as unknown as RouteRecordRaw);
+      // } else {
+      //   router.addRoute("layout", item as unknown as RouteRecordRaw);
+      // }
     });
   } catch (error) {
     // 当按钮 || 菜单请求出错时，重定向到登陆页
