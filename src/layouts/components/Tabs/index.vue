@@ -7,7 +7,7 @@
             <el-icon v-if="item.icon && tabsIcon" class="tabs-icon">
               <component :is="item.icon"></component>
             </el-icon>
-            {{ item.title }}
+            {{ item.name }}
           </template>
         </el-tab-pane>
       </el-tabs>
